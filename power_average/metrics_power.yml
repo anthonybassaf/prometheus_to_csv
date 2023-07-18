@@ -1,0 +1,7 @@
+Title: Liste des metriques provenant de Prometheus à destination de GCP
+TABLES:
+    OPENSTACK_QUALIF_POWER:
+        openstack_power_average_nd2:
+            name: "openstack_power_average_nd2"
+            site: "ND2"
+            query: "label_replace(node_hwmon_power_average_watt{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
