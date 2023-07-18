@@ -12,4 +12,4 @@ TABLES:
             site: "ND2"
             availability_zone: "AZ_NOI"
             aggregates: "HA_STD"
-            query: "label_replace(node_hwmon_power_average_watt{job='osp16-nd2', aggregates='HA_STD'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+            query: "sum by (hostname) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_STD'}[1h]), 'hostname', '$1', 'hostname', '([^-|^.]+).*'))"
