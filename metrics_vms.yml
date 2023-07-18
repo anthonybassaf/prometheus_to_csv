@@ -1,0 +1,15 @@
+Title: Liste des metriques provenant de Prometheus à destination de GCP
+TABLES:
+    OPENSTACK_VMS:
+        openstack_vms_mtr:
+            name: "openstack_vms_mtr"
+            site: "ND2"
+            availability_zone: "AZ_NOI"
+            aggregates: "HA_MTR"
+            query: "sum by (hostname) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_MTR'}[1h]), 'hostname', '$1', 'hostname', '([^-|^.]+).*'))"
+        openstack_vms_std:
+            name: "openstack_vms_std"
+            site: "ND2"
+            availability_zone: "AZ_NOI"
+            aggregates: "HA_STD"
+            query: "label_replace(node_hwmon_power_average_watt{job='osp16-nd2', aggregates='HA_STD'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
