@@ -107,6 +107,7 @@ def parse_args():
 
 
 if __name__ == "__main__":
+    os.makedirs(f"{cfg.app_directory}/tmp", exist_ok=True)
     args = parse_args()
     my_date = args.metricdate
 
@@ -123,7 +124,6 @@ if __name__ == "__main__":
 
             if args.tablename:
                 table_name = args.tablename
-                os.makedirs(f"{cfg.app_directory}/tmp", exist_ok=True)
                 csvDwriter = CSVDataWriter(f"{cfg.app_directory}/tmp/{table_name}_{my_date}.csv", table_name)
 
                 if args.metricname:
