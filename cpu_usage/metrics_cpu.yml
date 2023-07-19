@@ -1,0 +1,8 @@
+Title: Liste des metriques provenant de Prometheus à destination de GCP
+TABLES:
+    OPENSTACK_QUALIF_CPU:
+        openstack_cpu_usage_nd2:
+            name: "openstack_cpu_usage_idle_nd2"
+            site: "ND2"
+            mode: "Percentage Used"
+            query: "avg by(instance_short) (100 - (label_replace(irate(node_cpu_seconds_total{mode='idle', job='osp16-nd2'}[1h]), 'instance_short', '$1', 'instance', '([^-|^.]+).*'))* 100)"
