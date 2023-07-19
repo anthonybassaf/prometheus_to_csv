@@ -1,0 +1,23 @@
+Title: Liste des metriques provenant de Prometheus à destination de GCP
+TABLES:
+    OPENSTACK_QUALIF_RAM:
+        openstack_ram_usage_total_nd2:
+            name: "openstack_ram_usage_total_nd2"
+            site: "ND2"
+            memory: "Mem_Total"
+            query: "label_replace(node_memory_MemTotal_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+        openstack_ram_usage_free_nd2:
+            name: "openstack_ram_usage_free_nd2"
+            site: "ND2"
+            memory: "Mem_Free"
+            query: "label_replace(node_memory_MemFree_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+        openstack_ram_usage_cached_nd2:
+            name: "openstack_ram_usage_cached_nd2"
+            site: "ND2"
+            memory: "Mem_Cached"
+            query: "label_replace(node_memory_Cached_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+        openstack_ram_usage_buffer_nd2:
+            name: "openstack_ram_usage_buffer_nd2"
+            site: "ND2"
+            memory: "Mem_Buffer"
+            query: "label_replace(node_memory_Buffers_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
