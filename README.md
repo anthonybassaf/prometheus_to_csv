@@ -18,7 +18,7 @@ This repository includes Python scripts to convert Prometheus metric data to CSV
 
 ## Installation 
 1. Clone the repository:
-`git clone https://gitlab.tech.orange/anthony.assaf/prometheus_to_csv.git`
+`git clone https://github.com/anthony.assaf/prometheus_to_csv.git`
 2. Change into the repository's directory:
 `cd prometheus_to_csv` 
 3. Install the required Python libraries:
