@@ -45,8 +45,7 @@ The output will be CSV files written in the directory specified in config_qualif
 
 ## Dependencies
 Python 3.6+
-requests
-pyyaml
+All the packages and dependencies are listed in *requirements.txt*
 
 Please ensure that the necessary Python packages are installed. You can install them with pip:
 
