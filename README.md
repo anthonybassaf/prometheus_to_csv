@@ -16,9 +16,24 @@ This repository includes Python scripts to convert Prometheus metric data to CSV
 
 **metrics_qualif.yml**: This YAML file contains a list of tables and associated metrics that the script can fetch from the Prometheus server.
 
+## Installation 
+1. Clone the repository:
+`git clone https://gitlab.tech.orange/anthony.assaf/prometheus_to_csv.git`
+2. Change into the repository's directory:
+`cd prometheus_to_csv` 
+3. Install the required Python libraries:
+`pip install -r requirements.txt`
+
+
 ## Usage
 You need to provide the date of the metrics you want to collect in the format YYYYMMDD. Optional parameters include a specific table name and a specific metric name. If these are not provided, the script fetches all metrics. There's also an option to list all the available tables and metrics.
 
+- To list all available tables and metrics: 
+`python collect_qualif.py --list`
+:::information Use **python3** if you are using Python3.x version
+- To collect metrics for a specific date, table, and metric:
+`python collect_qualif.py --metricdate YYYYMMDD --tablename TABLENAME --metricname METRICNAME`
+**Replace 'YYYYMMDD' with the date, 'TABLENAME' with the table name, and 'METRICNAME' with the metric name** 
 
 `python collect_qualif.py --metricdate YYYYMMDD [--tablename TABLE] [--metricname METRIC] [--list]
 --metricdate YYYYMMDD: Specify the date of the metrics you want to collect.
@@ -35,7 +50,7 @@ pyyaml
 
 Please ensure that the necessary Python packages are installed. You can install them with pip:
 
-`pip install requests pyyaml`
+`pip install -r requirements.txt`
 
 ## Note
 
