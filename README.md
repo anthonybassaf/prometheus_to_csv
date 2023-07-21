@@ -30,7 +30,7 @@ You need to provide the date of the metrics you want to collect in the format YY
 
 - To list all available tables and metrics: 
 `python collect_qualif.py --list`
-:::information Use **python3** if you are using Python3.x version
+**Use `python3` if you are using Python3.x version**
 - To collect metrics for a specific date, table, and metric:
 `python collect_qualif.py --metricdate YYYYMMDD --tablename TABLENAME --metricname METRICNAME`
 **Replace 'YYYYMMDD' with the date, 'TABLENAME' with the table name, and 'METRICNAME' with the metric name** 
