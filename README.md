@@ -26,7 +26,9 @@ This repository includes Python scripts to convert Prometheus metric data to CSV
 
 
 ## Usage
-You need to provide the date of the metrics you want to collect in the format YYYYMMDD. Optional parameters include a specific table name and a specific metric name. If these are not provided, the script fetches all metrics. There's also an option to list all the available tables and metrics.
+You need to provide the start date the the end date of the metrics you want to collect in the format YYYYMMDD. The script will fetch the metrics for each date within this range. If only one date is provided, the script will fetch the metrics for that day only. 
+
+Optional parameters include a specific table name and a specific metric name. If these are not provided, the script fetches all metrics. There's also an option to list all the available tables and metrics.
 
 - To list all available tables and metrics: 
 `python collect_qualif.py --list`
@@ -36,12 +38,13 @@ You need to provide the date of the metrics you want to collect in the format YY
 **Replace 'YYYYMMDD' with the date, 'TABLENAME' with the table name, and 'METRICNAME' with the metric name** 
 
 `python collect_qualif.py --metricdate YYYYMMDD [--tablename TABLE] [--metricname METRIC] [--list]
---metricdate YYYYMMDD: Specify the date of the metrics you want to collect.
+--startdate YYYYMMDD: Specify the start date of the metrics you want to collect.
+--enddate YYYYMMDD: Specify the end date of the metrics you want to collect. 
 --tablename TABLE: Specify a table name if you want only a file for this table.
 --metricname METRIC: Specify a metric name if you want only a file for this metric. Note: You must specify a table name if you specify a metric name.
 --list: Lists all the tables and metrics available to collect.`
 
-The output will be CSV files written in the directory specified in config_qualif.py, and these CSV files will contain the fetched metrics data.
+The output will be CSV files written in the directory specified in `config_qualif.py`, and these CSV files will contain the fetched metrics data.
 
 ## Dependencies
 Python 3.6+
@@ -53,4 +56,4 @@ Please ensure that the necessary Python packages are installed. You can install 
 
 ## Note
 
-Please make sure to update the Prometheus server details and other necessary information in config_qualif.py before running the collect_qualif.py script.
+Please make sure to update the Prometheus server details and other necessary information in `config_qualif.py` before running the `collect_qualif.py` script.
