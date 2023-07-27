@@ -1,0 +1,129 @@
+Title: Liste des metriques provenant de Prometheus à destination de GCP
+TABLES:
+  OPENSTACK_PROD_CPU_AUB:
+    openstack_cpu_usage_aub:
+      name: "openstack_cpu_usage_aub"
+      site: "AUB"
+      job: "osp16-aub"
+      mode: "Percentage Used"
+      query: "100 - (label_replace(irate(node_cpu_seconds_total{mode='idle', job='osp16-aub'}[1h]), 'instance_short', '$1', 'instance', '([^-|^.]+).*'))* 100"
+  OPENSTACK_PROD_CPU_ND1:
+    openstack_cpu_usage_nd1:
+      name: "openstack_cpu_usage_nd1" 
+      site: "ND1"
+      job: "osp16-vdr"
+      mode: "Percentage Used"
+      query: "100 - (label_replace(irate(node_cpu_seconds_total{mode='idle', job='osp16-vdr'}[1h]), 'instance_short', '$1', 'instance', '([^-|^.]+).*'))* 100"
+  OPENSTACK_PROD_DMI_INFO_AUB:
+    openstack_dmi_info_gen10plus_aub:
+      name: "openstack_dmi_info_dl360_gen10plus_aub"
+      site: "AUB"
+      job: "osp16-aub"
+      product_name: "ProLiant DL360 Gen10 Plus"
+      query: "label_replace(node_dmi_info{product_name='ProLiant DL360 Gen10 Plus', job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+    openstack_dmi_gen10_aub:
+      name: "openstack_dmi_info_dl360_gen10_aub"
+      site: "AUB"
+      job: "osp16-aub"
+      product_name: "ProLiant DL360 Gen10"
+      query: "label_replace(node_dmi_info{product_name='ProLiant DL360 Gen10', job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+  OPENSTACK_PROD_DMI_INFO_ND1:
+    openstack_dmi_info_gen10plus_nd1:
+      name: "openstack_dmi_info_dl360_gen10plus_nd1"
+      site: "ND1"
+      job: "osp16-vdr"
+      product_name: "ProLiant DL360 Gen10 Plus"
+      query: "label_replace(node_dmi_info{product_name='ProLiant DL360 Gen10 Plus', job='osp16-vdr'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+    openstack_dmi_gen10_nd1:
+      name: "openstack_dmi_info_dl360_gen10_nd1"
+      site: "ND1"
+      job: "osp16-vdr"
+      product_name: "ProLiant DL360 Gen10"
+      query: "label_replace(node_dmi_info{product_name='ProLiant DL360 Gen10', job='osp16-vdr'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+  OPENSTACK_PROD_POWER_AUB:
+    openstack_power_average_aub:
+      name: "openstack_power_average_aub"
+      site: "AUB"
+      job: "osp16-aub"
+      query: "label_replace(node_hwmon_power_average_watt{job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+  OPENSTACK_PROD_POWER_ND1:
+    openstack_power_average_nd1:
+      name: "openstack_power_average_nd1"
+      site: "AUB"
+      job: "osp16-aub"
+      query: "label_replace(node_hwmon_power_average_watt{job='osp16-vdr'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+  OPENSTACK_PROD_RAM_AUB:
+    openstack_ram_usage_aub:
+      name: "openstack_ram_usage_aub"
+      site: "AUB"
+      job: "osp16-aub"
+      memory: "Percentage Used"
+      query: "(label_replace(node_memory_MemTotal_bytes{job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*') - label_replace(node_memory_MemFree_bytes{job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*') - label_replace(node_memory_Cached_bytes{job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*') - label_replace(node_memory_Buffers_bytes{job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')) / (label_replace(node_memory_MemTotal_bytes{job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')) * 100"
+  OPENSTACK_PROD_RAM_ND1:
+    openstack_ram_usage_nd1:
+      name: "openstack_ram_usage_nd1"
+      site: "ND1"
+      memory: " Percentage Used"
+      query: "(label_replace(node_memory_MemTotal_bytes{job='osp16-vdr'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*') - label_replace(node_memory_MemFree_bytes{job='osp16-vdr'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*') - label_replace(node_memory_Cached_bytes{job='osp16-vdr'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*') - label_replace(node_memory_Buffers_bytes{job='osp16-vdr'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')) / (label_replace(node_memory_MemTotal_bytes{job='osp16-vdr'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')) * 100"
+    openstack_ram_usage_aub:
+      name: "openstack_ram_usage_aub"
+      site: "AUB"
+      job: "osp16-aub"
+      memory: "Percentage Used"
+      query: "(label_replace(node_memory_MemTotal_bytes{job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*') - label_replace(node_memory_MemFree_bytes{job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*') - label_replace(node_memory_Cached_bytes{job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*') - label_replace(node_memory_Buffers_bytes{job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')) / (label_replace(node_memory_MemTotal_bytes{job='osp16-aub'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')) * 100"
+  OPENSTACK_PROD_VMS_AUB:
+    openstack_vms_prod_prm_aub:
+      name: "openstack_vms_prm_aub"
+      site: "AUB"
+      availability_zone: "AZ_AUB"
+      aggregates: "HA_PRM"
+      query: "sum by (instance_short) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_PRM', availability_zone='AZ_AUB'}[1h]), 'instance_short', '$1', 'hostname', '([^-|^.]+).*'))"
+    openstack_vms_prod_std_aub:
+      name: "openstack_vms_std_aub"
+      site: "AUB"
+      availability_zone: "AZ_AUB"
+      aggregates: "HA_STD"
+      query: "sum by (instance_short) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_STD', availability_zone='AZ_AUB'}[1h]), 'instance_short', '$1', 'hostname', '([^-|^.]+).*'))"
+    openstack_vms_prod_std_pp_aub:
+      name: "openstack_vms_std_pp_aub"
+      site: "AUB"
+      availability_zone: "AZ_AUB"
+      aggregates: "HA_STD_PP"
+      query: "sum by (instance_short) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_STD_PP', availability_zone='AZ_AUB'}[1h]), 'instance_short', '$1', 'hostname', '([^-|^.]+).*'))"
+    openstack_vms_prod_stk_aub:
+      name: "openstack_vms_stk_aub"
+      site: "AUB"
+      availability_zone: "AZ_AUB"
+      aggregates: "HA_STK"
+      query: "sum by (instance_short) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_STK', availability_zone='AZ_AUB'}[1h]), 'instance_short', '$1', 'hostname', '([^-|^.]+).*'))"
+  OPENSTACK_PROD_VMS_ND1:
+    openstack_vms_prod_gld_nd1:
+      name: "openstack_vms_gld_nd1"
+      site: "ND1"
+      availability_zone: "AZ_ND1"
+      aggregates: "HA_GLD"
+      query: "sum by (instance_short) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_GLD', availability_zone='AZ_ND1'}[1h]), 'instance_short', '$1', 'hostname', '([^-|^.]+).*'))"
+    openstack_vms_prod_prm_nd1:
+      name: "openstack_vms_prm_nd1"
+      site: "ND1"
+      availability_zone: "AZ_ND1"
+      aggregates: "HA_PRM"
+      query: "sum by (instance_short) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_PRM', availability_zone='AZ_ND1'}[1h]), 'instance_short', '$1', 'hostname', '([^-|^.]+).*'))"
+    openstack_vms_prod_std_nd1:
+      name: "openstack_vms_std_nd1"
+      site: "ND1"
+      availability_zone: "AZ_ND1"
+      aggregates: "HA_STD"
+      query: "sum by (instance_short) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_STD', availability_zone='AZ_ND1'}[1h]), 'instance_short', '$1', 'hostname', '([^-|^.]+).*'))"
+    openstack_vms_prod_std_pp_nd1:
+      name: "openstack_vms_std_pp_nd1"
+      availability_zone: "AZ_ND1"
+      site: "ND1"
+      aggregates: "HA_STD_PP"
+      query: "sum by (instance_short) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_STD_PP', availability_zone='AZ_ND1'}[1h]), 'instance_short', '$1', 'hostname', '([^-|^.]+).*'))"
+    openstack_vms_prod_stk_nd1:
+      name: "openstack_vms_stk_nd1"
+      site: "ND1"
+      availability_zone: "AZ_ND1"
+      aggregates: "HA_STK"
+      query: "sum by (instance_short) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_STK', availability_zone='AZ_ND1'}[1h]), 'instance_short', '$1', 'hostname', '([^-|^.]+).*'))"
