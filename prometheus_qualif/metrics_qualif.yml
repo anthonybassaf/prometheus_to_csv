@@ -1,0 +1,69 @@
+Title: Liste des metriques provenant de Prometheus à destination de GCP
+TABLES:
+  OPENSTACK_QUALIF_CPU:
+    openstack_cpu_usage_nd2:
+      name: "openstack_cpu_usage_nd2"
+      site: "ND2"
+      mode: "Percentage Used"
+      query: "avg by(instance_short) (100 - (label_replace(irate(node_cpu_seconds_total{mode='idle', job='osp16-nd2'}[1h]), 'instance_short', '$1', 'instance', '([^-|^.]+).*'))* 100)"
+  OPENSTACK_QUALIF_DMI_INFO:
+    openstack_dmi_gen10plus_nd2:
+      name: "openstack_dmi_gen10plus_nd2"
+      site: "ND2"
+      product_name: "ProLiant DL360 Gen10 Plus"
+      query: "label_replace(node_dmi_info{product_name='ProLiant DL360 Gen10 Plus'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+    openstack_dmi_gen10_nd2:
+      name: "openstack_dmi_gen10_nd2"
+      site: "ND2"
+      product_name: "ProLiant DL360 Gen10"
+      query: "label_replace(node_dmi_info{product_name='ProLiant DL360 Gen10'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+    openstack_dmi_gen9_nd2:
+      name: "openstack_dmi_gen9_nd2"
+      site: "ND2"
+      product_name: "ProLiant DL380 Gen9"
+      query: "label_replace(node_dmi_info{product_name='ProLiant DL380 Gen9'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+  OPENSTACK_QUALIF_POWER:
+    openstack_power_average_nd2:
+      name: "openstack_power_average_nd2"
+      site: "ND2"
+      query: "label_replace(node_hwmon_power_average_watt{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+  OPENSTACK_QUALIF_RAM:
+    openstack_ram_usage_nd2:
+      name: "openstack_ram_usage_nd2"
+      site: "ND2"
+      memory: "Percentage Used"
+      query: "(label_replace(node_memory_MemTotal_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*') - label_replace(node_memory_MemFree_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*') - label_replace(node_memory_Cached_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*') - label_replace(node_memory_Buffers_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')) / (label_replace(node_memory_MemTotal_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')) * 100"
+    # openstack_ram_usage_total_nd2:
+    #   name: "openstack_ram_usage_total_nd2"
+    #   site: "ND2"
+    #   memory: "Mem_Total"
+    #   query: "label_replace(node_memory_MemTotal_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+    # openstack_ram_usage_free_nd2:
+    #   name: "openstack_ram_usage_free_nd2"
+    #   site: "ND2"
+    #   memory: "Mem_Free"
+    #   query: "label_replace(node_memory_MemFree_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+    # openstack_ram_usage_cached_nd2:
+    #   name: "openstack_ram_usage_cached_nd2"
+    #   site: "ND2"
+    #   memory: "Mem_Cached"
+    #   query: "label_replace(node_memory_Cached_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+    # openstack_ram_usage_buffer_nd2:
+    #   name: "openstack_ram_usage_buffer_nd2"
+    #   site: "ND2"
+    #   memory: "Mem_Buffer"
+    #   query: "label_replace(node_memory_Buffers_bytes{job='osp16-nd2'}, 'instance_short', '$1', 'instance', '([^-|^.]+).*')"
+  OPENSTACK_QUALIF_VMS:
+    openstack_vms_mtr:
+      name: "openstack_vms_mtr"
+      site: "ND2"
+      availability_zone: "AZ_NOI"
+      aggregates: "HA_MTR"
+      query: "sum by (instance_short) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_MTR'}[1h]), 'instance_short', '$1', 'hostname', '([^-|^.]+).*'))"
+    openstack_vms_std:
+      name: "openstack_vms_std"
+      site: "ND2"
+      availability_zone: "AZ_NOI"
+      aggregates: "HA_STD"
+      query: "sum by (instance_short) (label_replace(avg_over_time(openstack_nova_running_vms{aggregates='HA_STD'}[1h]), 'instance_short', '$1', 'hostname', '([^-|^.]+).*'))"
+
